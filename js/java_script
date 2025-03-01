@@ -1,0 +1,91 @@
+document.addEventListener("DOMContentLoaded", function () {
+    /* ✅ 1. التحقق من تسجيل الدخول */
+    const loginForm = document.getElementById("loginForm");
+    if (loginForm) {
+        loginForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            let email = document.getElementById("email").value.trim();
+            let password = document.getElementById("password").value.trim();
+            let errorMessage = document.getElementById("loginError");
+
+            let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!email.match(emailPattern)) {
+                errorMessage.innerText = "يرجى إدخال بريد إلكتروني صحيح!";
+                errorMessage.style.color = "red";
+                return;
+            }
+            if (password.length < 6) {
+                errorMessage.innerText = "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل!";
+                errorMessage.style.color = "red";
+                return;
+            }
+
+            // إرسال الطلب إلى السيرفر عبر AJAX
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "login_process.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    if (xhr.responseText === "success") {
+                        window.location.href = "dashboard.html";
+                    } else {
+                        errorMessage.innerText = "البريد الإلكتروني أو كلمة المرور غير صحيحة!";
+                        errorMessage.style.color = "red";
+                    }
+                }
+            };
+            xhr.send(`email=${email}&password=${password}`);
+        });
+    }
+
+    /* ✅ 2. التحقق من نموذج تواصل معنا */
+    const contactForm = document.getElementById("contactForm");
+    if (contactForm) {
+        contactForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            let name = document.getElementById("name").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let message = document.getElementById("message").value.trim();
+            let errorMessage = document.getElementById("contactError");
+
+            if (name === "" || email === "" || message === "") {
+                errorMessage.innerText = "جميع الحقول مطلوبة!";
+                errorMessage.style.color = "red";
+                return;
+            }
+            let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!email.match(emailPattern)) {
+                errorMessage.innerText = "يرجى إدخال بريد إلكتروني صحيح!";
+                errorMessage.style.color = "red";
+                return;
+            }
+
+            // إرسال النموذج بعد التحقق
+            this.submit();
+        });
+    }
+
+    /* ✅ 3. تأثيرات بصرية للأزرار */
+    let buttons = document.querySelectorAll("button");
+    buttons.forEach(button => {
+        button.addEventListener("mouseenter", function () {
+            this.style.backgroundColor = "#007bff";
+            this.style.color = "#fff";
+        });
+        button.addEventListener("mouseleave", function () {
+            this.style.backgroundColor = "";
+            this.style.color = "";
+        });
+    });
+
+    /* ✅ 4. إظهار رسالة تأكيد بعد إرسال نموذج التواصل */
+    const successMessage = document.getElementById("successMessage");
+    if (successMessage) {
+        setTimeout(() => {
+            successMessage.style.display = "none";
+        }, 5000); // إخفاء الرسالة بعد 5 ثواني
+    }
+});

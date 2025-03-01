@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تواصل معنا</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* ✅ تنسيق عام */
+        body {
+            font-family: 'Arial', sans-serif;
+            direction: rtl;
+            text-align: right;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* ✅ تنسيق الهيدر */
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        nav ul li a.active {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        /* ✅ تنسيق الحاوية الرئيسية */
+        .contact-container {
+            width: 90%;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        /* ✅ تنسيق الفورم داخل كارد */
+        .form-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .form-card h2 {
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        /* ✅ تنظيم الحقول وجعلها داخل الفورم بشكل مرتب */
+        .form-group {
+            margin-bottom: 15px;
+            text-align: right;
+        }
+
+        .contact-form label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        /* ✅ تحسين زر الإرسال */
+        .contact-form .btn {
+            display: block;
+            width: 100%;
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px;
+            margin-top: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .contact-form .btn:hover {
+            background: #0056b3;
+        }
+
+        /* ✅ تنسيق معلومات الاتصال */
+        .contact-info {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f1f1f1;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .contact-info h3 {
+            color: #333;
+        }
+
+        /* ✅ زر العودة */
+        .home-button {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .btn-back {
+            background: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+        .btn-back:hover {
+            background: #218838;
+        }
+
+        /* ✅ الفوتر */
+        footer {
+            text-align: center;
+            padding: 10px;
+            background: #343a40;
+            color: white;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- ✅ الهيدر -->
+    <header>
+        <div class="container">
+            <h1>📞 تواصل معنا</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="services.html">الخدمات</a></li>
+                    <li><a href="appointment.html">حجز موعد</a></li>
+                    <li><a href="contact.html" class="active">تواصل معنا</a></li>
+                    <li><a href="login.html">تسجيل الدخول</a></li>
+                    <li><a href="logout.php">تسجيل الخروج</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ✅ نموذج التواصل داخل كارد -->
+    <section class="contact-container">
+        <div class="form-card">
+            <h2>📩 تواصل معنا</h2>
+            <p>نحن هنا لمساعدتك! يرجى ملء النموذج التالي وسنرد عليك في أقرب وقت ممكن.</p>
+
+            <form action="contact_process.php" method="post" class="contact-form">
+                <div class="form-group">
+                    <label for="name">👤 الاسم الكامل:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">📧 البريد الإلكتروني:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">📞 رقم الهاتف:</label>
+                    <input type="text" id="phone" name="phone" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">📝 الرسالة:</label>
+                    <textarea id="message" name="message" rows="5" placeholder="اكتب رسالتك هنا..." required></textarea>
+                </div>
+
+                <!-- ✅ زر الإرسال -->
+                <button type="submit" class="btn">📤 إرسال الرسالة</button>
+            </form>
+        </div>
+
+        <!-- ✅ معلومات الاتصال -->
+        <div class="contact-info">
+            <h3>📍 موقعنا</h3>
+            <p>العنوان: شارع السيارات، المدينة، البلد</p>
+            <h3>📞 الهاتف</h3>
+            <p>+123 456 7890</p>
+            <h3>📧 البريد الإلكتروني</h3>
+            <p>info@carservice.com</p>
+        </div>
+
+        <!-- ✅ زر العودة للرئيسية -->
+        <div class="home-button">
+            <a href="index.html" class="btn-back">⬅️ العودة إلى الرئيسية</a>
+        </div>
+    </section>
+
+    <!-- ✅ الفوتر -->
+    <footer>
+        <div class="container">
+            <p>حقوق الطبع والنشر &copy; 2025 مركز صيانة السيارات - جميع الحقوق محفوظة</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حجز موعد</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <style>/* تحسين شريط التواصل العلوي */
+    .top-bar {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 8px 0;
+        font-size: 14px;
+    }
+    
+    /* تحسين شكل الهيدر */
+    header {
+        background-color: #d4af37;
+        padding: 15px 0;
+        color: white;
+        text-align: center;
+        position: relative;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .header-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    nav ul {
+        list-style: none;
+        padding: 0;
+        margin-top: 10px;
+    }
+    
+    nav ul li {
+        display: inline;
+        margin: 0 15px;
+    }
+    
+    nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        padding: 8px 15px;
+        border-radius: 5px;
+        transition: background 0.3s ease;
+    }
+    
+    nav ul li a:hover, nav ul li a.active {
+        background-color: white;
+        color: #d4af37;
+        font-weight: bold;
+    }
+    
+
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    text-align: center;
+    padding: 20px;
+}
+
+h2 {
+    color: #333;
+}
+
+form {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin: auto;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+input, select, button {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+</style>
+
+<header>
+    <div class="top-bar">
+        <p>📞 اتصل بنا: 0123456789 | ✉️ البريد: info@service.com</p>
+    </div>
+    <div class="container header-content">
+        <h1>🚗 حجز موعد الصيانة</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="services.html">الخدمات</a></li>
+                <li><a href="appointment.html" class="active">حجز موعد</a></li>
+                <li><a href="contact.html">تواصل معنا</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+    <section class="form-container">
+        <h2>📅 احجز موعد الصيانة</h2>
+        
+        <form id="appointment-form">
+            <label for="name">👤 الاسم الكامل:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">📧 البريد الإلكتروني:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="phone">📞 رقم الهاتف:</label>
+            <input type="text" id="phone" name="phone" required>
+
+            <label for="service">🔧 نوع الخدمة:</label>
+            <select id="service" name="service">
+                <option value="تغيير زيت">🛢️ تغيير الزيت</option>
+                <option value="إصلاح فرامل">🛑 إصلاح الفرامل</option>
+                <option value="فحص الإطارات">🚗 فحص الإطارات</option>
+                <option value="إصلاح مكيف">❄️ إصلاح مكيف السيارة</option>
+                <option value="صيانة الكهرباء">⚡ صيانة الكهرباء</option>
+            </select>
+
+            <label for="date">📆 تاريخ الموعد:</label>
+            <input type="date" id="date" name="date" required>
+
+            <button type="submit">✅ تأكيد الحجز</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>حقوق الطبع والنشر © 2025 مركز صيانة السيارات - جميع الحقوق محفوظة</p>
+    </footer>
+
+    <script src="js/scripts.js"></script>
+
+</body>
+</html>
