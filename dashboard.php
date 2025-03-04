@@ -24,8 +24,8 @@ if ($conn->connect_error) {
 $user_id = $_SESSION['user_id'];
 $sql = "SELECT service_id, appointment_date 
         FROM appointments a
-        JOIN services s ON a.service_id = s.id 
-        WHERE a.user_id = ?";
+        JOIN services s ON service_id = id 
+        WHERE user_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
@@ -102,7 +102,7 @@ $conn->close();
                 </tr>
                 <?php foreach ($appointments as $appointment): ?>
                     <tr>
-                        <td><?php echo htmlspecialchars($appointment['service_name']); ?></td>
+                        <td><?php echo htmlspecialchars($appointment['service_id']); ?></td>
                         <td><?php echo htmlspecialchars($appointment['appointment_date']); ?></td>
                     </tr>
                 <?php endforeach; ?>
