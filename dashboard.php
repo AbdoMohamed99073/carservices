@@ -22,9 +22,8 @@ if ($conn->connect_error) {
 
 // جلب بيانات المواعيد الخاصة بالمستخدم مع اسم الخدمة
 $user_id = $_SESSION['user_id'];
-$sql = "SELECT service_id, appointment_date 
-        FROM appointments a
-        JOIN services s ON service_id = id 
+$sql = "SELECT * 
+        FROM appointments 
         WHERE user_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $user_id);
@@ -35,6 +34,27 @@ $appointments = [];
 while ($row = $result->fetch_assoc()) {
     $appointments[] = $row;
 }
+
+$service_id = $appointments;
+
+$sql = "SELECT * 
+        FROM services 
+        WHERE id = ?";
+for ($x = 0; $x < count($service_id); $x++) {
+
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $service_id[$x]['service_id']);
+$stmt->execute();
+$result = $stmt->get_result();
+}
+$services = [];
+while ($row = $result->fetch_assoc()) {
+    $services[] = $row;
+
+}
+
+
+
 
 $stmt->close();
 $conn->close();
@@ -102,7 +122,7 @@ $conn->close();
                 </tr>
                 <?php foreach ($appointments as $appointment): ?>
                     <tr>
-                        <td><?php echo htmlspecialchars($appointment['service_id']); ?></td>
+                        <td><?php echo htmlspecialchars($services[1]['name']); ?></td>
                         <td><?php echo htmlspecialchars($appointment['appointment_date']); ?></td>
                     </tr>
                 <?php endforeach; ?>
