@@ -22,11 +22,12 @@ if ($conn->connect_error) {
 
 // جلب بيانات المواعيد الخاصة بالمستخدم مع اسم الخدمة
 $user_id = $_SESSION['user_id'];
-$sql = "SELECT * 
-        FROM appointments 
-        WHERE user_id = ?";
+$sql = "SELECT services.name, appointments.appointment_date
+        FROM appointments
+        INNER JOIN services ON appointments.service_id= services.id
+        WHERE appointments.user_id = ?" ;
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $user_id);
+$stmt->bind_param( "i", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -34,25 +35,6 @@ $appointments = [];
 while ($row = $result->fetch_assoc()) {
     $appointments[] = $row;
 }
-
-$service_id = $appointments;
-
-$sql = "SELECT * 
-        FROM services 
-        WHERE id = ?";
-for ($x = 0; $x < count($service_id); $x++) {
-
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $service_id[$x]['service_id']);
-$stmt->execute();
-$result = $stmt->get_result();
-}
-$services = [];
-while ($row = $result->fetch_assoc()) {
-    $services[] = $row;
-
-}
-
 
 
 
@@ -122,7 +104,7 @@ $conn->close();
                 </tr>
                 <?php foreach ($appointments as $appointment): ?>
                     <tr>
-                        <td><?php echo htmlspecialchars($services[1]['name']); ?></td>
+                        <td><?php echo htmlspecialchars($appointment['name']); ?></td>
                         <td><?php echo htmlspecialchars($appointment['appointment_date']); ?></td>
                     </tr>
                 <?php endforeach; ?>
@@ -133,7 +115,7 @@ $conn->close();
     </div>
 
     <br>
-    <a href="appointment.html">🔧 لوحة التحكم</a>
+    <a href="appointment_form.php">🔧 لوحة التحكم</a>
     <a href="index.html">🏠 الصفحة الرئيسية</a>
     <a href="logout.php">🚪 تسجيل الخروج</a>
 

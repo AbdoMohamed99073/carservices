@@ -21,9 +21,13 @@ if ($conn->connect_error) {
     die("فشل الاتصال بقاعدة البيانات: " . $conn->connect_error);
 }
 
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user_id = $_SESSION['user_id'];
-    $service_id = htmlspecialchars(trim($_POST['service_id']));
+
+    //var_dump(value: $_POST);
+    $service_id = htmlspecialchars(trim($_POST['service']));
+
     $appointment_date = htmlspecialchars(trim($_POST['appointment_date']));
 
     // التحقق من صحة البيانات
@@ -44,6 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     $check_stmt->close();
 
+
     // استخدام Prepared Statements لمنع SQL Injection
     $stmt = $conn->prepare("INSERT INTO appointments (user_id, service_id, appointment_date) VALUES (?, ?, ?)");
     $stmt->bind_param("iis", $user_id, $service_id, $appointment_date);
@@ -56,6 +61,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $stmt->close();
 }
+
+
 
 $conn->close();
 ?>
